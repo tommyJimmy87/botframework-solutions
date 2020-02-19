@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using Microsoft.Bot.Solutions.Responses;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace ITSMSkill.Utilities
 {
     public static class EnumToLocalizedString
     {
-        public static string ToLocalizedString(this Enum enumValue)
+        public static string ToLocalizedString(this Enum enumValue, LocaleTemplateEngineManager manager)
         {
             FieldInfo fi = enumValue.GetType().GetField(enumValue.ToString());
 
@@ -22,7 +23,7 @@ namespace ITSMSkill.Utilities
 
             if (attributes != null && attributes.Length > 0)
             {
-                return attributes[0].Description;
+                return manager.GetString(attributes[0].Description);
             }
             else
             {
@@ -46,7 +47,7 @@ namespace ITSMSkill.Utilities
         {
             get
             {
-                return resource.GetString(key);
+                return key;
             }
         }
     }

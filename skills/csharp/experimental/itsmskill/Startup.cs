@@ -26,6 +26,7 @@ using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ITSMSkill.Utilities;
 
 namespace ITSMSkill
 {
@@ -104,12 +105,7 @@ namespace ITSMSkill
             services.AddHostedService<QueuedHostedService>();
 
             // Configure responses
-            services.AddSingleton(sp => new ResponseManager(
-                settings.CognitiveModels.Select(l => l.Key).ToArray(),
-                new MainResponses(),
-                new TicketResponses(),
-                new KnowledgeResponses(),
-                new SharedResponses()));
+            services.AddSingleton(EngineWrapper.CreateLocaleTemplateEngineManager("en-us"));
 
             // Configure service
             services.AddSingleton<IServiceManager>(new ServiceManager());

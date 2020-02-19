@@ -1,0 +1,6 @@
+[import] (..\Knowledge\KnowledgeResponsesTexts.lg)
+[import] (..\Main\MainResponsesTexts.lg)
+[import] (..\Shared\SharedResponsesTexts.lg)
+[import] (..\Ticket\TicketResponsesTexts.lg)
+[import] (..\Shared\SharedStringsTexts.lg)
+[import] (..\Shared\Shared.lg)

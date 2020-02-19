@@ -20,6 +20,7 @@ using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Bot.Solutions.Responses;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
+using ITSMSkill.Utilities;
 
 namespace ITSMSkill.Dialogs
 {
@@ -28,7 +29,7 @@ namespace ITSMSkill.Dialogs
         public CreateTicketDialog(
              BotSettings settings,
              BotServices services,
-             ResponseManager responseManager,
+             LocaleTemplateEngineManager responseManager,
              ConversationState conversationState,
              IServiceManager serviceManager,
              IBotTelemetryClient telemetryClient)

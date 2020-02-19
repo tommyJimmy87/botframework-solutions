@@ -371,7 +371,8 @@ namespace ITSMSkill.Services.ServiceNow
             var userId = await client.GetAsync<GetUserIdResponse>(request);
             if (userId == null || string.IsNullOrEmpty(userId.result))
             {
-                throw new Exception(SharedStrings.InvalidGetUserId);
+                // TODO simplify SharedStrings.InvalidGetUserId
+                throw new Exception("GetUserId is invalid.");
             }
 
             return userId.result;

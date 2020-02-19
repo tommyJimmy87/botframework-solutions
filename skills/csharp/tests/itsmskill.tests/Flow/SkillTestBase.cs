@@ -29,6 +29,7 @@ using Microsoft.Bot.Schema;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
+using ITSMSkill.Utilities;
 
 namespace ITSMSkill.Tests.Flow
 {
@@ -43,6 +44,8 @@ namespace ITSMSkill.Tests.Flow
         public static readonly string TestToken = "TestToken";
 
         public IServiceCollection Services { get; set; }
+
+        public LocaleTemplateEngineManager TemplateManager { get; set; }
 
         [TestInitialize]
         public override void Initialize()
@@ -111,13 +114,8 @@ namespace ITSMSkill.Tests.Flow
             Services.AddHostedService<QueuedHostedService>();
 
             // Configure responses
-            ResponseManager = new ResponseManager(
-                new string[] { "en", "de", "es", "fr", "it", "zh" },
-                new MainResponses(),
-                new TicketResponses(),
-                new KnowledgeResponses(),
-                new SharedResponses());
-            Services.AddSingleton(ResponseManager);
+            TemplateManager = EngineWrapper.CreateLocaleTemplateEngineManager("en-us");
+            Services.AddSingleton(TemplateManager);
 
             // Configure service
             Services.AddSingleton<IServiceManager, MockServiceManager>();
@@ -142,6 +140,7 @@ namespace ITSMSkill.Tests.Flow
             var sp = Services.BuildServiceProvider();
             var adapter = sp.GetService<TestAdapter>();
             adapter.AddUserToken(AuthenticationProvider, adapter.Conversation.ChannelId, adapter.Conversation.User.Id, TestToken, MagicCode);
+            adapter.Use(new RegisterClassMiddleware<LocaleTemplateEngineManager>(TemplateManager));
 
             var testFlow = new TestFlow(adapter, async (context, token) =>
             {
@@ -211,6 +210,11 @@ namespace ITSMSkill.Tests.Flow
 
                 AssertSameId(messageActivity, cardIds);
             };
+        }
+
+        protected new string[] ParseReplies(string templateId, StringDictionary tokens = null)
+        {
+            return TemplateManager.ParseReplies(templateId, tokens);
         }
 
         private void AssertSameId(IMessageActivity activity, string[] cardIds = null)

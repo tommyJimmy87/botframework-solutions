@@ -10,17 +10,18 @@ using ITSMSkill.Models;
 using ITSMSkill.Responses.Main;
 using ITSMSkill.Responses.Shared;
 using ITSMSkill.Services;
+using ITSMSkill.Utilities;
 using Luis;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Choices;
+using Microsoft.Bot.Connector;
+using Microsoft.Bot.Schema;
 using Microsoft.Bot.Solutions;
 using Microsoft.Bot.Solutions.Dialogs;
 using Microsoft.Bot.Solutions.Responses;
 using Microsoft.Bot.Solutions.Skills;
 using Microsoft.Bot.Solutions.Skills.Models;
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Schema;
 using SkillServiceLibrary.Utilities;
 
 namespace ITSMSkill.Dialogs
@@ -29,13 +30,13 @@ namespace ITSMSkill.Dialogs
     {
         private BotSettings _settings;
         private BotServices _services;
-        private ResponseManager _responseManager;
+        private LocaleTemplateEngineManager _responseManager;
         private IStatePropertyAccessor<SkillState> _stateAccessor;
 
         public MainDialog(
             BotSettings settings,
             BotServices services,
-            ResponseManager responseManager,
+            LocaleTemplateEngineManager responseManager,
             UserState userState,
             ConversationState conversationState,
             CreateTicketDialog createTicketDialog,

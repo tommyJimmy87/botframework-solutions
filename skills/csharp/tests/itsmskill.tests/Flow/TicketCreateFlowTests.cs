@@ -83,7 +83,7 @@ namespace ITSMSkill.Tests.Flow
 
             var confirmUrgency = new StringDictionary
             {
-                { "Urgency", MockData.CreateTicketUrgencyLevel.ToLocalizedString() }
+                { "Urgency", MockData.CreateTicketUrgencyLevel.ToLocalizedString(TemplateManager) }
             };
 
             await this.GetTestFlow()
@@ -120,7 +120,7 @@ namespace ITSMSkill.Tests.Flow
 
             var confirmUrgency = new StringDictionary
             {
-                { "Urgency", MockData.CreateTicketUrgencyLevel.ToLocalizedString() }
+                { "Urgency", MockData.CreateTicketUrgencyLevel.ToLocalizedString(TemplateManager) }
             };
 
             await this.GetTestFlow()

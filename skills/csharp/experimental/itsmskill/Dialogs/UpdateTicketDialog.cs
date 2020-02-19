@@ -28,7 +28,7 @@ namespace ITSMSkill.Dialogs
         public UpdateTicketDialog(
              BotSettings settings,
              BotServices services,
-             ResponseManager responseManager,
+             LocaleTemplateEngineManager responseManager,
              ConversationState conversationState,
              IServiceManager serviceManager,
              IBotTelemetryClient telemetryClient)
@@ -78,17 +78,17 @@ namespace ITSMSkill.Dialogs
 
             if (!string.IsNullOrEmpty(state.TicketTitle))
             {
-                sb.AppendLine(string.Format(SharedStrings.Title, state.TicketTitle));
+                sb.AppendLine(string.Format(ResponseManager.GetString(SharedStrings.Title), state.TicketTitle));
             }
 
             if (!string.IsNullOrEmpty(state.TicketDescription))
             {
-                sb.AppendLine(string.Format(SharedStrings.Description, state.TicketDescription));
+                sb.AppendLine(string.Format(ResponseManager.GetString(SharedStrings.Description), state.TicketDescription));
             }
 
             if (state.UrgencyLevel != UrgencyLevel.None)
             {
-                sb.AppendLine(string.Format(SharedStrings.Urgency, state.UrgencyLevel.ToLocalizedString()));
+                sb.AppendLine(string.Format(ResponseManager.GetString(SharedStrings.Urgency), state.UrgencyLevel.ToLocalizedString(ResponseManager)));
             }
 
             if (sb.Length == 0)

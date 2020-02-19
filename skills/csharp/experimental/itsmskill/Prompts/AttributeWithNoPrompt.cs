@@ -12,6 +12,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Solutions.Util;
 using Microsoft.Bot.Schema;
+using Microsoft.Bot.Solutions.Responses;
 
 namespace ITSMSkill.Prompts
 {
@@ -57,6 +58,7 @@ namespace ITSMSkill.Prompts
                 throw new ArgumentNullException(nameof(turnContext));
             }
 
+            var manager = turnContext.TurnState.Get<LocaleTemplateEngineManager>();
             var result = new PromptRecognizerResult<AttributeType?>();
             if (turnContext.Activity.Type == ActivityTypes.Message)
             {
@@ -74,7 +76,7 @@ namespace ITSMSkill.Prompts
                     var text = message.Text.ToLowerInvariant();
                     foreach (var attribute in attributes)
                     {
-                        if (IsMessageAttributeMatch(text, attribute))
+                        if (IsMessageAttributeMatch(text, attribute, manager))
                         {
                             result.Succeeded = true;
                             result.Value = attribute;
@@ -87,12 +89,12 @@ namespace ITSMSkill.Prompts
             return await Task.FromResult(result);
         }
 
-        private bool IsMessageAttributeMatch(string message, AttributeType attribute)
+        private bool IsMessageAttributeMatch(string message, AttributeType attribute, LocaleTemplateEngineManager manager)
         {
             switch (attribute)
             {
                 case AttributeType.None: return false;
-                default: return message.Equals(attribute.ToLocalizedString());
+                default: return message.Equals(attribute.ToLocalizedString(manager));
             }
         }
     }

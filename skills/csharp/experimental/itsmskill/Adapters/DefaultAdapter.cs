@@ -4,6 +4,7 @@
 using System.Globalization;
 using ITSMSkill.Responses.Shared;
 using ITSMSkill.Services;
+using ITSMSkill.Utilities;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Azure;
 using Microsoft.Bot.Builder.Dialogs;
@@ -27,7 +28,7 @@ namespace ITSMSkill.Bots
             ConversationState conversationState,
             TelemetryInitializerMiddleware telemetryMiddleware,
             IBotTelemetryClient telemetryClient,
-            ResponseManager responseManager)
+            LocaleTemplateEngineManager responseManager)
             : base(credentialProvider)
         {
             OnTurnError = async (context, exception) =>
@@ -58,6 +59,7 @@ namespace ITSMSkill.Bots
             Use(new EventDebuggerMiddleware());
             Use(new SkillMiddleware(userState, conversationState, conversationState.CreateProperty<DialogState>(nameof(DialogState))));
             Use(new SetSpeakMiddleware());
+            Use(new RegisterClassMiddleware<LocaleTemplateEngineManager>(responseManager));
         }
     }
 }

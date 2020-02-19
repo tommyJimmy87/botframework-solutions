@@ -31,7 +31,7 @@ namespace ITSMSkill.Dialogs
         public ShowTicketDialog(
              BotSettings settings,
              BotServices services,
-             ResponseManager responseManager,
+             LocaleTemplateEngineManager responseManager,
              ConversationState conversationState,
              IServiceManager serviceManager,
              IBotTelemetryClient telemetryClient)
@@ -110,22 +110,22 @@ namespace ITSMSkill.Dialogs
             var sb = new StringBuilder();
             if (!string.IsNullOrEmpty(state.TicketNumber))
             {
-                sb.AppendLine(string.Format(SharedStrings.TicketNumber, state.TicketNumber));
+                sb.AppendLine(string.Format(ResponseManager.GetString(SharedStrings.TicketNumber), state.TicketNumber));
             }
 
             if (!string.IsNullOrEmpty(state.TicketTitle))
             {
-                sb.AppendLine(string.Format(SharedStrings.Search, state.TicketTitle));
+                sb.AppendLine(string.Format(ResponseManager.GetString(SharedStrings.Search), state.TicketTitle));
             }
 
             if (state.UrgencyLevel != UrgencyLevel.None)
             {
-                sb.AppendLine(string.Format(SharedStrings.Urgency, state.UrgencyLevel.ToLocalizedString()));
+                sb.AppendLine(string.Format(ResponseManager.GetString(SharedStrings.Urgency), state.UrgencyLevel.ToLocalizedString(ResponseManager)));
             }
 
             if (state.TicketState != TicketState.None)
             {
-                sb.AppendLine(string.Format(SharedStrings.TicketState, state.TicketState.ToLocalizedString()));
+                sb.AppendLine(string.Format(ResponseManager.GetString(SharedStrings.TicketState), state.TicketState.ToLocalizedString(ResponseManager)));
             }
 
             if (sb.Length == 0)

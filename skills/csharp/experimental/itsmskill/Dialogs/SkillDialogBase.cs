@@ -35,7 +35,7 @@ namespace ITSMSkill.Dialogs
              string dialogId,
              BotSettings settings,
              BotServices services,
-             ResponseManager responseManager,
+             LocaleTemplateEngineManager responseManager,
              ConversationState conversationState,
              IServiceManager serviceManager,
              IBotTelemetryClient telemetryClient)
@@ -161,7 +161,7 @@ namespace ITSMSkill.Dialogs
 
         protected IStatePropertyAccessor<SkillState> StateAccessor { get; set; }
 
-        protected ResponseManager ResponseManager { get; set; }
+        protected LocaleTemplateEngineManager ResponseManager { get; set; }
 
         protected IServiceManager ServiceManager { get; set; }
 
@@ -307,7 +307,7 @@ namespace ITSMSkill.Dialogs
             {
                 var replacements = new StringDictionary
                 {
-                    { "Attribute", state.AttributeType.ToLocalizedString() }
+                    { "Attribute", state.AttributeType.ToLocalizedString(ResponseManager) }
                 };
 
                 var options = new PromptOptions()
@@ -678,15 +678,15 @@ namespace ITSMSkill.Dialogs
                     {
                         new Choice()
                         {
-                            Value = UrgencyLevel.Low.ToLocalizedString()
+                            Value = UrgencyLevel.Low.ToLocalizedString(ResponseManager)
                         },
                         new Choice()
                         {
-                            Value = UrgencyLevel.Medium.ToLocalizedString()
+                            Value = UrgencyLevel.Medium.ToLocalizedString(ResponseManager)
                         },
                         new Choice()
                         {
-                            Value = UrgencyLevel.High.ToLocalizedString()
+                            Value = UrgencyLevel.High.ToLocalizedString(ResponseManager)
                         }
                     }
                 };
@@ -745,27 +745,27 @@ namespace ITSMSkill.Dialogs
                     {
                         new Choice()
                         {
-                            Value = TicketState.New.ToLocalizedString()
+                            Value = TicketState.New.ToLocalizedString(ResponseManager)
                         },
                         new Choice()
                         {
-                            Value = TicketState.InProgress.ToLocalizedString()
+                            Value = TicketState.InProgress.ToLocalizedString(ResponseManager)
                         },
                         new Choice()
                         {
-                            Value = TicketState.OnHold.ToLocalizedString()
+                            Value = TicketState.OnHold.ToLocalizedString(ResponseManager)
                         },
                         new Choice()
                         {
-                            Value = TicketState.Resolved.ToLocalizedString()
+                            Value = TicketState.Resolved.ToLocalizedString(ResponseManager)
                         },
                         new Choice()
                         {
-                            Value = TicketState.Closed.ToLocalizedString()
+                            Value = TicketState.Closed.ToLocalizedString(ResponseManager)
                         },
                         new Choice()
                         {
-                            Value = TicketState.Canceled.ToLocalizedString()
+                            Value = TicketState.Canceled.ToLocalizedString(ResponseManager)
                         }
                     }
                 };
@@ -975,22 +975,22 @@ namespace ITSMSkill.Dialogs
                 }
                 else
                 {
-                    return SharedStrings.GoForward;
+                    return ResponseManager.GetString(SharedStrings.GoForward);
                 }
             }
             else if (page == maxPage)
             {
-                return SharedStrings.GoPrevious;
+                return ResponseManager.GetString(SharedStrings.GoPrevious);
             }
             else
             {
-                return SharedStrings.GoBoth;
+                return ResponseManager.GetString(SharedStrings.GoBoth);
             }
         }
 
         protected IList<Choice> GetNavigateList(int page, int maxPage)
         {
-            var result = new List<Choice>() { new Choice(SharedStrings.YesUtterance), new Choice(SharedStrings.NoUtterance) };
+            var result = new List<Choice>() { new Choice(ResponseManager.GetString(SharedStrings.YesUtterance)), new Choice(ResponseManager.GetString(SharedStrings.NoUtterance)) };
             if (page == 0)
             {
                 if (maxPage == 0)
@@ -998,17 +998,17 @@ namespace ITSMSkill.Dialogs
                 }
                 else
                 {
-                    result.Add(new Choice(SharedStrings.GoForwardUtterance));
+                    result.Add(new Choice(ResponseManager.GetString(SharedStrings.GoForwardUtterance)));
                 }
             }
             else if (page == maxPage)
             {
-                result.Add(new Choice(SharedStrings.GoPreviousUtterance));
+                result.Add(new Choice(ResponseManager.GetString(SharedStrings.GoPreviousUtterance)));
             }
             else
             {
-                result.Add(new Choice(SharedStrings.GoForwardUtterance));
-                result.Add(new Choice(SharedStrings.GoPreviousUtterance));
+                result.Add(new Choice(ResponseManager.GetString(SharedStrings.GoForwardUtterance)));
+                result.Add(new Choice(ResponseManager.GetString(SharedStrings.GoPreviousUtterance)));
             }
 
             return result;
@@ -1061,22 +1061,22 @@ namespace ITSMSkill.Dialogs
             {
                 Title = ticket.Title,
                 Description = ticket.Description,
-                UrgencyLevel = string.Format(SharedStrings.Urgency, ticket.Urgency.ToLocalizedString()),
-                State = string.Format(SharedStrings.TicketState, ticket.State.ToLocalizedString()),
-                OpenedTime = string.Format(SharedStrings.OpenedAt, ticket.OpenedTime.ToString()),
-                Id = string.Format(SharedStrings.ID, ticket.Id),
+                UrgencyLevel = string.Format(ResponseManager.GetString(SharedStrings.Urgency), ticket.Urgency.ToLocalizedString(ResponseManager)),
+                State = string.Format(ResponseManager.GetString(SharedStrings.TicketState), ticket.State.ToLocalizedString(ResponseManager)),
+                OpenedTime = string.Format(ResponseManager.GetString(SharedStrings.OpenedAt), ticket.OpenedTime.ToString()),
+                Id = string.Format(ResponseManager.GetString(SharedStrings.ID), ticket.Id),
                 ResolvedReason = ticket.ResolvedReason,
                 Speak = ticket.Description,
-                Number = string.Format(SharedStrings.TicketNumber, ticket.Number),
-                ActionUpdateTitle = SharedStrings.TicketActionUpdateTitle,
-                ActionUpdateValue = string.Format(SharedStrings.TicketActionUpdateValue, ticket.Number),
-                ProviderDisplayText = string.Format(SharedStrings.PoweredBy, ticket.Provider),
+                Number = string.Format(ResponseManager.GetString(SharedStrings.TicketNumber), ticket.Number),
+                ActionUpdateTitle = ResponseManager.GetString(SharedStrings.TicketActionUpdateTitle),
+                ActionUpdateValue = string.Format(ResponseManager.GetString(SharedStrings.TicketActionUpdateValue), ticket.Number),
+                ProviderDisplayText = string.Format(ResponseManager.GetString(SharedStrings.PoweredBy), ticket.Provider),
             };
 
             if (ticket.State != TicketState.Closed)
             {
-                card.ActionCloseTitle = SharedStrings.TicketActionCloseTitle;
-                card.ActionCloseValue = string.Format(SharedStrings.TicketActionCloseValue, ticket.Number);
+                card.ActionCloseTitle = ResponseManager.GetString(SharedStrings.TicketActionCloseTitle);
+                card.ActionCloseValue = string.Format(ResponseManager.GetString(SharedStrings.TicketActionCloseValue), ticket.Number);
             }
 
             return card;
@@ -1086,15 +1086,15 @@ namespace ITSMSkill.Dialogs
         {
             var card = new KnowledgeCard()
             {
-                Id = string.Format(SharedStrings.ID, knowledge.Id),
+                Id = string.Format(ResponseManager.GetString(SharedStrings.ID), knowledge.Id),
                 Title = knowledge.Title,
-                UpdatedTime = string.Format(SharedStrings.UpdatedAt, knowledge.UpdatedTime.ToString()),
+                UpdatedTime = string.Format(ResponseManager.GetString(SharedStrings.UpdatedAt), knowledge.UpdatedTime.ToString()),
                 Content = knowledge.Content,
                 Speak = knowledge.Title,
-                Number = string.Format(SharedStrings.TicketNumber, knowledge.Number),
-                UrlTitle = SharedStrings.OpenKnowledge,
+                Number = string.Format(ResponseManager.GetString(SharedStrings.TicketNumber), knowledge.Number),
+                UrlTitle = ResponseManager.GetString(SharedStrings.OpenKnowledge),
                 UrlLink = knowledge.Url,
-                ProviderDisplayText = string.Format(SharedStrings.PoweredBy, knowledge.Provider),
+                ProviderDisplayText = string.Format(ResponseManager.GetString(SharedStrings.PoweredBy), knowledge.Provider),
             };
             return card;
         }

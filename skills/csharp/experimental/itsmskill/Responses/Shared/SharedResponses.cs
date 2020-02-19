@@ -1,4 +1,4 @@
-﻿// https://docs.microsoft.com/en-us/visualstudio/modeling/t4-include-directive?view=vs-2017
+// https://docs.microsoft.com/en-us/visualstudio/modeling/t4-include-directive?view=vs-2017
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
@@ -16,6 +16,10 @@ namespace ITSMSkill.Responses.Shared
         public const string CancellingMessage = "CancellingMessage";
         public const string NoAuth = "NoAuth";
         public const string AuthFailed = "AuthFailed";
+        public const string AuthFailedTextAndSpeak = "AuthFailedTextAndSpeak";
+        public const string AuthFailedTextAndSpeak1 = "AuthFailedTextAndSpeak1";
+        public const string AuthFailedTextAndSpeak2 = "AuthFailedTextAndSpeak2";
+        public const string AuthFailedTextAndSpeak3 = "AuthFailedTextAndSpeak3";
         public const string ActionEnded = "ActionEnded";
         public const string ErrorMessage = "ErrorMessage";
         public const string ConfirmSearch = "ConfirmSearch";
@@ -39,3 +43,4 @@ namespace ITSMSkill.Responses.Shared
         public const string ServiceFailed = "ServiceFailed";
     }
 }
+

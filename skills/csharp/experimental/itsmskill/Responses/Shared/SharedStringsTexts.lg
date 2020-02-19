@@ -1,0 +1,120 @@
+[import] (SharedStrings.lg)
+
+# UrgencyHigh.Text(Data)
+- High
+
+# UrgencyLow.Text(Data)
+- Low
+
+# UrgencyMedium.Text(Data)
+- Medium
+
+# TicketStateCanceled.Text(Data)
+- Canceled
+
+# TicketStateClosed.Text(Data)
+- Closed
+
+# TicketStateInProgress.Text(Data)
+- In Progress
+
+# TicketStateNew.Text(Data)
+- New
+
+# TicketStateOnHold.Text(Data)
+- On Hold
+
+# TicketStateResolved.Text(Data)
+- Resolved
+
+# AttributeDescription.Text(Data)
+- description
+
+# AttributeId.Text(Data)
+- id
+
+# AttributeUrgency.Text(Data)
+- urgency
+
+# OpenedAt.Text(Data)
+- Opened at 
+
+# TicketState.Text(Data)
+- State: {0}
+
+# UpdatedAt.Text(Data)
+- Updated at 
+
+# Urgency.Text(Data)
+- Urgency: {0}
+
+# Description.Text(Data)
+- Description: {0}
+
+# ID.Text(Data)
+- ID: {0}
+
+# AttributeState.Text(Data)
+- state
+
+# TicketNumber.Text(Data)
+- Number: {0}
+
+# AttributeNumber.Text(Data)
+- number
+
+# OpenKnowledge.Text(Data)
+- Open Article
+
+# GoBoth.Text(Data)
+- "Go forward/previous" to navigate.
+
+# GoForward.Text(Data)
+- "Go forward" to navigate.
+
+# GoPrevious.Text(Data)
+- "Go previous" to navigate.
+
+# InvalidGetUserId.Text(Data)
+- GetUserId is invalid.
+
+# PoweredBy.Text(Data)
+- Powered by **{0}**
+
+# TicketActionCloseTitle.Text(Data)
+- Close
+
+# TicketActionCloseValue.Text(Data)
+- close the ticket {0}
+
+# TicketActionUpdateTitle.Text(Data)
+- Update
+
+# TicketActionUpdateValue.Text(Data)
+- update the ticket {0}
+
+# AttributeSearch.Text(Data)
+- text
+
+# AttributeTitle.Text(Data)
+- title
+
+# Search.Text(Data)
+- Search text: {0}
+
+# Title.Text(Data)
+- Title: {0}
+
+# GoForwardUtterance.Text(Data)
+- go forward
+
+# GoPreviousUtterance.Text(Data)
+- go previous
+
+# NoUtterance.Text(Data)
+- no
+
+# YesUtterance.Text(Data)
+- yes
+
+
