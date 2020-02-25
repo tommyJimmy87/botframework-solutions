@@ -152,6 +152,7 @@
   "body": [
     {
       "type": "Container",
+      "backgroundImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATgAAABuCAMAAACEAf8GAAAAt1BMVEVutORxtuRyteRyteZrsuJytONytuNRm9RRmtJRmtNSmtJTm9NztuR0teR0tuR1tuR2uORzt+RnsONmsOJmsOJlr+JmsOJlr+N0t+Vfqt9lr+JMmdNMmdNMmdRNmtROnNVQndZVodlWotlWo9pZoNZaodZbodZbotdcotddo9ddqN1fqt9gq99ireBkruFlr+JvsuJwsuJxs+Jys+JytOJztOJ1t+V2uOV3uOV4ueZ5ueZ6uub///89+magAAAAHHRSTlPDxsnJy9TU1tfX19fZ2tra2tzn7e/09/v7/Pz9RlHxIQAAAAFiS0dEPKdqYc8AAAKhSURBVHja7d09T+NAEMbx9cQXI0GqK0AYXU9FQfj+X4EGUvABeD046QCJFyUUwInksMk+O6H5j8vspshPXjuzM2NXewl9/H3sGZz92U6p+nzMwq3freuwcJPc2HAFbmi4frebXjcy3BdubQq4Fbhx4QrdsHClblS4YjcoXLkbE87BDQnn4UaEu/VwA8I9PXi4AeHuXdx4cNNnPT5lw/m48eCqbrffGW48OKs63XZSwPWccbWLG/CuujHwcAPC2YY5uBEjh3pk5W7IWPU/OcGNuTuyIKe4Qffj5uQkN+oO8Ac5zQ2bc/gnN7uW3LhZrje52XWbAi5fTnYjZ/Lrkelu6NqR+ulKdkPDXV7s6j+/Brudj1N1N40zTnBLzboFnOBWIGdsN13O4G6ynNHdVDnDu4lyFm6anBHd9hc/EuQs3DQ5CzdNzsJNk4PBXZ7tdw1lyhnMbdw9mCdn4abJ1eH2QS7dzQIu3y2lJt1PY6nmu+WsVgs3Tc7CTZOzcNPkIHCn4+XnLifHgDs6yJm9lBwDrsqbvowcAu70Z3KXQ8A9/0rucgi4Qf5XvpRDwG2f+Msxbg43yV2OAbd56C7HgNsanXjLQSKHncGxsxwlyG/XnOUw20recpyNTGc5ULLGV46U5XKVQ6UHPeVYCWlHOVgJhJ8crejGTQ5X5tWuTVzkeIWFbaPJDehwqtzC80qIxdNto1znhvNyyHJ9Dzlmg4iDHLQlqVyO2gRXLIdtuyyV4zb6FsqBe/K1/3PvcuSHGbTDAjn0O2vaob5a2W9JKpCDv5dLl4PD6XJ0OFVuHQ8nyjUBJ8oFnCgXcKJcwIkxRMC9yv2YBNz3yAWcKBdwolzAiXIBJ8oFnCgXcPNyxwG3YrmAE1drwC3K1ZOAW6VcwIlyLx4q0EZfu4MvAAAAAElFTkSuQmCC",
       "items": [
         {
           "type": "ColumnSet",
@@ -173,13 +174,27 @@
                           "columns": [
                             {
                               "type": "Column",
+                              "height": "stretch",
+                              "items": [
+                                {
+                                  "type": "Image",
+                                  "horizontalAlignment": "Center",
+                                  "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAXCAYAAAD+4+QTAAAABmJLR0QA/wD/AP+gvaeTAAABfklEQVRIicWVvUoDURCFvxs2FoI/RQpXQlDEQkTEQq0EEdPYaJNgk85CUtn6NLG3sRDyAFaKja0PoPamUsyxyCyM16i7oGbgsne+OzNn97DsQhSSljWI4/jsu5C0b3278VkiqQHMOJbttyWVC+is2PVA0pLjT0HSNbBR5K4Lxk3JNrfAhK11Y4eO5Vkn1rfu2CVAYgf9EEIPQNIDcAbcZyxPSLqzvgc36w0gs4sQwmbegQWEL4A0e5I1SU+/LQJMA3eZyDNw9QciO/D3dl0DlIYczEm6krTvWNtY2fKy5e08Yp9EgD7QA14dezHmo2f8xxiZXTVJXUl7jh0Z83Z1JR25mj1jtXjmMLvGgEVgyrGKsWB5sLziaqaMjcUDR2ZXVdK5pLpjLWOJ5YnlLVdTN1aNZw6zaxzYAlLH5o1l9SXL511Namw8Hjgau74obkrqRHZ1JDVdzbax2bg/lwiwCjT4aFfDeBYLxibj5n+xK/sKp5JOf1uEwcvw+C//+HezTRHEHbM6ywAAAABJRU5ErkJggg==",
+                                  "width": "35px",
+                                  "height": "35px"
+                                }
+                              ],
+                              "width": "auto"
+                            },
+                            {
+                              "type": "Column",
                               "verticalContentAlignment": "Center",
                               "items": [
                                 {
                                   "type": "TextBlock",
                                   "size": "Large",
                                   "weight": "Bolder",
-                                  "color": "Default",
+                                  "color": "Light",
                                   "text": "@{listTitle}"
                                 }
                               ],
@@ -187,11 +202,24 @@
                             }
                           ]
                         },
-						@{GetTotalAndOverlapV1(totalEventCount, overlapEventCount, dateTimeString, isOverview)}
+						@{GetTotalAndOverlap(totalEventCount, overlapEventCount, dateTimeString, isOverview)}
                         {
                           "type": "ColumnSet",
                           "height": "stretch",
                           "columns": [
+                            {
+                              "type": "Column",
+                              "height": "stretch",
+                              "verticalContentAlignment": "Center",
+                              "items": [
+                                {
+                                  "type": "Image",
+                                  "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAXUlEQVQ4je2RsQ2AMAwEH1YNkiVSZgwmYFg4mhSWKWKo49L2/b9sKVmAAZbdj/AGXMANVD9bM7Ck0+3yx5nuvk/4XfEL8cJL2t2lKCFFHVNTJCNiHQY4Pgs4kRb7Dy4r7HcZf6eIAAAAAElFTkSuQmCC",
+                                  "height": "20px"
+                                }
+                              ],
+                              "width": "auto"
+                            },
                             {
                               "type": "Column",
                               "spacing": "Small",
@@ -201,8 +229,22 @@
                                   "type": "TextBlock",
                                   "horizontalAlignment": "Center",
                                   "size": "Medium",
-                                  "color": "Default",
+                                  "color": "Light",
                                   "text": "@{indicator}"
+                                }
+                              ],
+                              "width": "auto"
+                            },
+                            {
+                              "type": "Column",
+                              "horizontalAlignment": "Center",
+                              "spacing": "Small",
+                              "verticalContentAlignment": "Center",
+                              "items": [
+                                {
+                                  "type": "Image",
+                                  "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAbElEQVQ4je3TOQqAMBCF4YlHVMRWRAi41N7Ew7r9FjZhRMli6StD8r1hICIqwAhYfe4VYOLKEYUAObA4SB+DFMCaipRfIBWwpSI1sKcizRuSeRj6DiHtrWrv/sf3PG0YERmMMbN3uzOFDfmJJ2hm7ho83P78AAAAAElFTkSuQmCC",
+                                  "height": "20px"
                                 }
                               ],
                               "width": "auto"
