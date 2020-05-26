@@ -16,3 +16,6 @@ test-results.xml
 # Coverage report
 coverage
 .nyc_output
+
+src/appsettings.*
+src/cognitivemodels.*
